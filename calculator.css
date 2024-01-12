@@ -1,0 +1,50 @@
+.edge {
+  border: black solid 2px;
+  border-radius: 15px;
+  width: 500px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.display {
+  display: flex;
+  width: 400px;
+  height: 100px;
+  border: lightgray solid 1px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  border: blue dotted 1px;
+  height: 60px;
+}
+
+.row {
+  display: flex;
+  width: 400px;
+  height: 100px;
+  border: white solid 1px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button {
+  width: 75px;
+  height: 75px;
+  border: solid 1px black;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.button-on-off {
+  width: 150px;
+}
