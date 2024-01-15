@@ -1,4 +1,10 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
 .edge {
+  margin-top: 100px;
   border: black solid 2px;
   border-radius: 15px;
   width: 500px;
@@ -7,6 +13,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px 0px;
+}
+
+.model {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .display {
@@ -16,13 +29,14 @@
   border: lightgray solid 1px;
   border-radius: 20px;
   margin-bottom: 10px;
+  padding: 0 20px;
   font-size: 40px;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 }
 
 .value {
-  border: blue dotted 1px;
+  /* border: blue dotted 1px; */
   height: 60px;
 }
 
@@ -36,6 +50,8 @@
 }
 
 .button {
+  box-sizing: border-box;
+  padding-top: 20px;
   width: 75px;
   height: 75px;
   border: solid 1px black;
