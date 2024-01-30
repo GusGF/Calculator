@@ -1,18 +1,46 @@
-let inputArrStr_g;
-inputArrStr_g = [];
+let inputArrStr_g = [];
+let display_g = document.getElementById("value");
 
 // Event listener picks up all key presses till it receives a '='
-// then the expression which is stored in an array is evaluated
 document.addEventListener("click", (event) => {
-  inputArrStr_g[inputArrStr_g.length] = event.target.getAttribute("data-key");
-  console.log(`The array length is: ${inputArrStr_g.length}`);
-  // console.log(event.target.getAttribute("data-key"));
-  if (inputArrStr_g[inputArrStr_g.length - 1] == "=") {
-    console.log(`Raw input: ${inputArrStr_g}`);
-    createArrayEq();
+  // Clear display when user starts a new calculation i.e. when raw input array is empty!
+  if (inputArrStr_g.length == 0) {
+    clearDisplay();
+  }
+  // If user cancels input, reset back to '0' and clear raw input array
+  if (event.target.getAttribute("data-key") == "C") {
+    display_g.textContent = "0";
+    inputArrStr_g = [];
+  } else if (event.target.getAttribute("data-key") == "pwr") {
+    display_g.textContent = "POWER OFF";
+    inputArrStr_g = [];
+  } else if (event.target.getAttribute("data-key") != null) {
+    // Collect key presses in our array
+    inputArrStr_g[inputArrStr_g.length] = event.target.getAttribute("data-key");
+    // console.log(`Value is....: ${event.target.getAttribute("data-key")}`);
+    // console.log(`Value is....: ${inputArrStr_g[inputArrStr_g.length]}`);
+    // Echo to our calculator display
+    echoToDisplay(event.target.getAttribute("data-key"));
+    if (inputArrStr_g[inputArrStr_g.length - 1] == "=") {
+      console.log(`Raw input: ${inputArrStr_g}`);
+      createArrayEq();
+    }
   }
 });
 
+function clearDisplay() {
+  // let display = document.getElementById("value");
+  display_g.textContent = "";
+}
+
+function echoToDisplay(character_p) {
+  // console.log(character_p);
+  // let lcd = document.getElementById("value");
+  let numToAdd = document.createTextNode(character_p);
+  display_g.appendChild(numToAdd);
+}
+
+// Return the answer to the equation received from evaluate()
 function solveEq(operandOne, operandTwo, operator) {
   console.log(`Equation: ${operandOne}${operator}${operandTwo}`);
   let operand1 = parseFloat(operandOne);
@@ -28,12 +56,14 @@ function solveEq(operandOne, operandTwo, operator) {
   }
 }
 
-function display(answer) {
-  let lcd = document.getElementsByClassName("value");
-  lcd[0].innerHTML = answer;
-  console.log(answer);
+// display a value
+function display(numToDisplay_p) {
+  // let lcd = document.getElementById("value");
+  display_g.innerHTML = numToDisplay_p;
+  console.log(numToDisplay_p);
 }
 
+// Create values from the raw input array and store in array 'inputArrStr_g'
 function createArrayEq() {
   let operator;
   let operand = "";
@@ -59,6 +89,7 @@ function createArrayEq() {
   evaluate(inputArrValues_v);
 }
 
+// Look at each equation in array and send to solveEq()
 function evaluate(p_inputArrV) {
   let valueOne = 0;
   let valueTwo = 0;
@@ -74,10 +105,11 @@ function evaluate(p_inputArrV) {
       valueOne = p_inputArrV[i];
     } else if (isNaN(p_inputArrV[i])) {
       operator = p_inputArrV[i];
+      valueTwo = "";
     } else {
       valueTwo = p_inputArrV[i];
     }
-    // When sub-equation is extracted fully, solve
+    // When we have an equation solve then move on to the next number
     if (valueOne && operator && valueTwo) {
       let answer = solveEq(valueOne, valueTwo, operator);
       // Have we reached the end of the equation? If not keep going and
