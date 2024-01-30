@@ -1,3 +1,7 @@
+// NOT IMPLEMENTED...
+// Display a snarky error message if the user tries to divide by 0… and don’t let it crash your calculator!
+// You should round answers with long decimals so that they don’t overflow the screen.
+
 let inputArrStr_g = [];
 let display_g = document.getElementById("value");
 
